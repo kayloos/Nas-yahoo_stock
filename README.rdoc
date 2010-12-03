@@ -1,0 +1,143 @@
+= yahoo_stock
+
+	* http://github.com/nas/yahoo_stock
+
+== DESCRIPTION:
+
+Provides an interface to yahoo finance to get stock related data. For instance, latest trade related data, volume, 50 day moving average, market cap, etc, virtually any thing that yahoo finance provides.
+
+If you don't know the stock / scrip symbol of the company then you can find that out by using the YahooStock::ScripSymbol class. The methods are mentioned in the Usage section below. For instance, YHOO for yahoo, GOOG for google, etc.
+The kind of parameters to be passed can be found after initializing the
+YahooStock::Quote object and passing valid_parameters message to the quote object, example is given below in the USAGE section.
+
+For details : http://nasir.wordpress.com/2009/10/28/ruby-gem-for-finance-data
+
+
+== INSTALL:
+
+	gem sources -a http://gemcutter.org
+
+	sudo gem install nas-yahoo_stock
+
+
+== USAGE:
+
+	require 'rubygems'
+	require 'yahoo_stock'
+
+* Initialize quote object:
+
+	quote = YahooStock::Quote.new(:stock_symbols => ['YHOO', 'GOOG'])
+
+* To view the valid parameters that can be passed:
+
+	quote.valid_parameters
+
+* To view the current parameters used:
+
+	quote.current_parameters
+
+* To view the current stock symbols used:
+
+	quote.current_symbols
+
+* To add more stocks to the list:
+
+	quote.add_symbols('MSFT', 'AAPL')
+
+* To remove stocks from list:
+
+	quote.remove_symbols('MSFT', 'AAPL')
+
+* To find data for all stocks, this will give a string containing all values:
+
+	quote.results.output
+
+* To return an array instead of a string use:
+
+	quote.results(:to_array).output
+
+* To return a hash, use:
+
+	quote.results(:to_hash).output
+
+* To return xml, use:
+
+	quote.results(:to_xml).output
+
+* to store results in a file, use:
+
+	quote.results.store('filename')
+
+* To find out the stock symbol for a company:
+
+	symbol = YahooStock::ScripSymbol.new('Yahoo')
+
+* To find all symbols for that company, this will give a string containing all values:
+
+	symbol.results.output
+
+* Similarly to YahooStock::Quote, results can be converted to an array, a hash, xml, or stored in a file:
+
+	symbol.results(:to_array).output
+	symbol.results(:to_hash).output
+	symbol.results(:to_xml).output
+	symbol.results.store('filename')
+
+* To find symbols for multiple companies:
+
+	symbols = YahooStock::ScripSymbol.results('Yahoo', 'Company1', 'Company3')
+
+* To find historical data for a stock:
+
+	history = YahooStock::History.new(:stock_symbol => 'yhoo', :start_date => Date.today-20, :end_date => Date.today-2)
+
+* As with regular quotes and symbol lookups, the results can be returned in various formats:
+
+	history.results.output
+	history.results(:to_array).output
+	history.results(:to_hash).output
+	history.results(:to_xml).output
+	history.results.store('filename')
+
+==Docs
+
+http://rdoc.info/projects/nas/yahoo_stock
+
+== TESTS:
+
+To run all tests 'rspec spec' from the root directory. It requires rspec >= 2.1.0
+
+To run cucumber features "rake cucumber". It requires cucumber >= 0.9.4
+
+Cucumber Test html output is logged in log/features.html
+
+==Thanks
+
+* Thanks to {Ryan Sandridge}[http://github.com/dissolved] for adding the dividend query option.
+
+
+== LICENSE:
+
+(The MIT License)
+
+Copyright (c) 2009 Nasir Jamal
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

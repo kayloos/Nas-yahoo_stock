@@ -1,0 +1,94 @@
+=== 0.1.1 2009-08-31
+
+* 1 major enhancement:
+  * Initial release
+
+=== 0.1.2 2009-09-01
+
+* 1 minor change:
+  * changed method name YahooStock::Quote#get_data to get
+
+=== 0.1.3 2009-09-05
+
+* 3 additions:
+  * adds a new class called YahooStock::ScripSymbol that allows to 
+    find out the stock symbol for a company
+  * adds specs for previous and new code
+  * adds 
+
+=== 0.1.4 2009-09-05
+
+* 2 changes related with ruby 1.9:
+  * modifies quote class to be compatible with ruby 1.9
+  * modifies interface class to be compatible with 1.9
+
+=== 0.1.5 2009-09-06
+
+* 1 changes related with ruby 1.9:
+  * modifies ScripSymbol class to be compatible with ruby 1.9
+
+=== 0.1.6 2009-09-07
+
+* 1 addition:
+  * adds convenience methods Quote#realtime, standard and extended to 
+    fetch relevant stock values
+
+=== 1.0.1 2009-09-10
+
+* 1 addition:
+  * adds feature to retrieve historical stock data
+
+=== 1.0.2 2009-10-04
+Major changes in the public API. Check the README.rdoc file and individual classes for more information
+
+* 8 addition:
+  * adds YahooStock::Interface::History
+  * adds YahooStock::Interface::Quote
+  * adds YahooStock::Interface::ScripSymbol
+  * adds YahooStock::Result as a superclass for all formatter classes
+  * adds array format, Result::ArrayFormat, to generate results as an array
+  * adds hash format, Result::ArrayFormat, to generate results as key value pairs
+  * adds base class as parent for public facing classes
+  * adds observers to check when it is required to send request to yahoo again to get fresh data
+
+* 7 changes:
+  * changes YahooStock::Interface to be the main interface class. Other interface classes will inherit from this
+  * changes YahooStock::ScripSymbol to use YahooStock::Interface::ScripSymbol
+  * removes all history interface logic from YahooStock::History and uses YahooStock::Interface::History
+  * changes YahooStock::Quote, YahooStock::History, YahooStock::ScripSymbol to extend from YahooStock::Base
+  * sorts url parameters before sending request to yahoo
+  * YahooInterface::Quote#realtime, extended, and standard methods should return self to allow calling different format output method calls
+  * do not discard any empty values when finding scrip symbol options for a company as this interferes with different format options
+
+=== 1.0.3 2009-10-04
+
+* 2 changes:
+  * changes README file to add reference for gemcutter
+  * changes gemspec to use nas-yahoo_stock
+
+=== 1.0.4 2009-10-23
+
+* 2 addition:
+	* adds support for xml format
+	* adds cucumber features
+	
+* 1 changes:
+  * changes README file to remove git source add for github
+
+=== 1.0.5 2010-05-07
+
+* 1 change:
+  * made the case statement in YahooStock::Interface::History on line 86 ruby 1.9.1 compatible
+
+=== 1.0.6 2010-11-13
+
+* 2 addition:
+  * adds dividend query option by Ryan Sandridge
+  * adds cucumber rake task
+
+* 1 changes:
+  * Make sure all tests are run with rspec 2.1.0
+
+=== 1.0.7 2010-11-14
+
+* Some refactoring after the addition of dividend option to the history
